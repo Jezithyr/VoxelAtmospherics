@@ -3,3 +3,7 @@
 
 #include "AtmosphericsModule.h"
 
+void UAtmosphericsModule::Initialize(FSubsystemCollectionBase& Collection)
+{
+	UE_LOG(LogTemp, Warning, TEXT("test 1"));
+}

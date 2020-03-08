@@ -5,7 +5,9 @@
 #include "CoreMinimal.h"
 #include "Subsystems/WorldSubsystem.h"
 #include "VoxelChunk.h"
+#include "Engine/World.h"
 #include "AtmosphericsSubSystem.generated.h"
+
 
 /**
  * 
@@ -22,19 +24,34 @@ class VOXELATMOSPHERICS_API UAtmosphericsSubSystem : public UWorldSubsystem
 	void CreateChunk(FIntVector ChunkCoords);
 	void InitializeChunks();
 	void DestroyChunks();
-
-
-	UPROPERTY()
-	FVector Origin;
 	
 	UPROPERTY()
-	float VoxelSize;
+	FVector Origin;
 
 	UPROPERTY()
-	TMap<FIntVector,AVoxelChunk> Chunks;
+	float VoxelSize = 100.0f; //size in U-Units (cm)
+
+	UPROPERTY()
+	float ChunkSize = 16 * VoxelSize;
+
+	FIntVector ChunkExtents = FIntVector(10,10,10);
+
+	UPROPERTY()
+	bool Enabled = true;
+	
+	UPROPERTY()
+	TMap<FIntVector,AVoxelChunk*> Chunks;
 	
 	
 public:
+
+	UFUNCTION()
+	FIntVector WorldToChunkPos(FVector WorldPos);
+
+	UFUNCTION()
+	FVector ChunkPosToWorld(FIntVector ChunkPos);
+
+	
 	UFUNCTION()
 	AVoxelChunk* GetChunk(FIntVector ChunkCoords);
 	UFUNCTION()

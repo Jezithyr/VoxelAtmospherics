@@ -13,5 +13,7 @@ UCLASS()
 class VOXELATMOSPHERICS_API UAtmosphericsModule : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
+
+	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 	
 };
